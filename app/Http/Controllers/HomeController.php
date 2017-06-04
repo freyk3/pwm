@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Database\Eloquent;
 
 class HomeController extends Controller
 {
@@ -24,5 +28,15 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+    public function myaccount()
+    {
+        //dd(Auth::user()->id);
+        $view['user'] = Auth::user();
+        $instruments = User::find(Auth::user()->id)->instruments;
+        $view['instruments'] = $instruments;
+        //dd($instruments);
+
+        return view('myaccount', $view);
     }
 }

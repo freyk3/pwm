@@ -15,15 +15,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'status',
+        'name', 'email', 'password', 'status', 'nickname', 'music', 'about', 'skype', 'phone', 'avatar'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function instruments()
+    {
+        return $this->belongsToMany('App\Models\Instrument')->withPivot('level');
+    }
 }
